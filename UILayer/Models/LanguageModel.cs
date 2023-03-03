@@ -9,9 +9,9 @@ namespace UILayer.Models
         {
             AllLanguages = new List<SelectListItem>();
         }
-        public int? LanguageId { get; set; }
+        public int? Id { get; set; }
         [DisplayName("Language Name")]
-        public String? LanguageName { get; set; }
+        public String? Name { get; set; }
         [DisplayName("All Languages")]
         public List<SelectListItem>? AllLanguages { get; set; }
     }

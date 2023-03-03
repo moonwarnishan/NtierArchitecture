@@ -1,7 +1,25 @@
+using LinqToDB;
+using LinqToDB.AspNet;
+using RepositoryLayer.Data;
+using RepositoryLayer.Interfaces;
+using RepositoryLayer.Repository;
+using ServicesLayer.Interfaces;
+using ServicesLayer.Services;
+using UILayer.Factories;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddLinqToDBContext<ApplicationDataConnection>((provider,options)=>
+   options.UseSqlServer(builder.Configuration.GetConnectionString("PersonInfo")));
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddScoped<ILanguageServices, LanguageServices>();
+builder.Services.AddScoped<IPersonServices, PersonServices>();
+builder.Services.AddScoped<IPersonInfoIndifferentLanguagesServices,PersonInfoIndifferentLanguagesServices>();
+builder.Services.AddScoped<IPersonFactory, PersonFactory>();
 builder.Services.AddControllersWithViews();
+
 
 var app = builder.Build();
 

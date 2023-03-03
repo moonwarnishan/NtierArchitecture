@@ -11,9 +11,9 @@ namespace UILayer.Models
             MaritalStatuses = new List<SelectListItem>();
             Genders = new List<SelectListItem>();
         }
-        public int? PersonId { get; set; }
+        public int? Id { get; set; }
         [Required, Display(Name = "Name")]
-        public string? PersonName { get; set; }
+        public string? Name { get; set; }
         [Required, DisplayName("Date of Birth")]
         public DateTime? DateOfBirth { get; set; }
         [Required]
@@ -22,7 +22,7 @@ namespace UILayer.Models
         public string? GenderInfo { get; set; }
         
         public int? MaritalStatus { get; set; }
-        [Required, DisplayName("Marital Status")]
+        [DisplayName("Marital Status")]
         public string? MaritalStatusInfo { get; set; }
         [Required]
         [DisplayName("Creation Date")]

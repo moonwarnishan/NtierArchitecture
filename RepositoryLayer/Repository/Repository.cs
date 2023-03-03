@@ -30,9 +30,10 @@ namespace RepositoryLayer.Repository
 
         public IEnumerable<T> GetAll()
         {
-            return _dataConnection.GetTable<T>().ToList();
+            var data = _dataConnection.GetTable<T>().ToList();
+            return data;
         }
-
+        
         public T GetById(int id)
         {
             if(id == null)
@@ -53,14 +54,16 @@ namespace RepositoryLayer.Repository
             {
                 throw new ArgumentNullException(); 
             }
+            //insert and save to db
             _dataConnection.Insert(entity);
+            
         }
 
         public void Update(T entity)
         {
             if (entity == null)
             {
-                throw new ArgumentNullException(); ;
+                throw new NullReferenceException();
             }
             _dataConnection.Update(entity);
         }

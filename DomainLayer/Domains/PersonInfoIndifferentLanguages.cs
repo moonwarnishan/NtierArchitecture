@@ -5,9 +5,11 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LinqToDB.Mapping;
 
 namespace DomainLayer.Domains
 {
+    [Table("PersonsInfoInDifferentLanguages")]
     public class PersonInfosInDifferentLanguages : BaseEntity
     {
         public string Name { get; set; } 
