@@ -9,5 +9,6 @@ namespace UILayer.Factories
         PersonModel PreparePersonModelForEdit(int id);
         List<PersonModel> PreparePersonModelList();
         PersonModel PreparePersonModelForDetailsView(int Id);
+
     }
 }

@@ -13,15 +13,16 @@ namespace DomainLayer.Domains
     public class PersonInfosInDifferentLanguages : BaseEntity
     {
         public string Name { get; set; } 
-        [Required]
+        [Required, Column("DateOfBirth")]
         public DateTime DateOfBirth { get; set; }
-        [Required]
+        [Required, Column("Gender")]
         public int Gender { get; set; }
-        [Required]
+        [Required, Column("MaritalStatus")]
         public int MaritalStatus { get; set; }
-
+        [Column("PersonId")]
         public int PersonId { get; set; }
         public Person Person { get; set; }
+        [Column("LanguageId")]
         public int LanguageId { get; set; }
         public Language Language { get; set; }
     }

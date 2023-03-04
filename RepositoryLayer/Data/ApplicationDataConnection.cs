@@ -12,7 +12,7 @@ namespace RepositoryLayer.Data
         public ApplicationDataConnection(DataOptions<ApplicationDataConnection> options)
         : base(
               new DataOptions()
-            .UseSqlServer("Server=.;Database=PersonInfoLayeredArchitecture;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True;")
+            .UseSqlServer("Server=MOONWAR;Database=PersonInfoLayeredArchitecture;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True;")
             )
         {
 
@@ -20,6 +20,5 @@ namespace RepositoryLayer.Data
         public ITable<Person> Persons { set; get; }
         public ITable<Language> Languages { set; get; }
         public ITable<PersonInfosInDifferentLanguages> PersonsInfoIndifferentLanguages { set; get; }
-
     }
 }

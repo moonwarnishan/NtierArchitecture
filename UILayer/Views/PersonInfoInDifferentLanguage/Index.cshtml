@@ -1,0 +1,67 @@
+﻿@model IEnumerable<PersonInfoInDifferentLanguagesModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a class="btn btn-primary ml-2" asp-controller="PersonInfoInDifferentLanguage" asp-action="Create">Create New</a>
+    <a class="btn btn-primary ml-2" asp-controller="LanguageSelect" asp-action="Index">Language Select</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOfBirth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GenderInfo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaritalStatusInfo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Person)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Language)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateOfBirth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GenderInfo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaritalStatusInfo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Person.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Language.Name)
+                </td>
+                <td>
+                    <a asp-controller="PersonInfoInDifferentLanguage" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-controller="PersonInfoInDifferentLanguage" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-controller="PersonInfoInDifferentLanguage" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

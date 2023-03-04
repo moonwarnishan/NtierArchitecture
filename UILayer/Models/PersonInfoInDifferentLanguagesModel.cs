@@ -34,5 +34,6 @@ namespace UILayer.Models
         public List<SelectListItem>? AllPersons { get; set; }
         [DisplayName("All Languages")]
         public List<SelectListItem>? AllLanguages { get; set; }
+
     }
 }

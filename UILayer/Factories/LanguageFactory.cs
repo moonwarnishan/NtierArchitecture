@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using ServicesLayer.Interfaces;
 using UILayer.Models;
 
 namespace UILayer.Factories
 {
-    public class LanguageFactory
+    public class LanguageFactory : ILanguageFactory
     {
         private readonly ILanguageServices _languageServices;
         private readonly IMapper _mapper;
@@ -12,6 +13,21 @@ namespace UILayer.Factories
         {
             _languageServices = languageServices;
             _mapper = mapper;
+        }
+
+        public LanguageModel CreateLanguageModel()
+        {
+            var languages = _languageServices.GetAll();
+            var languageModel = new LanguageModel();
+            foreach (var language in languages)
+            {
+                languageModel.AllLanguages.Add(new SelectListItem()
+                {
+                    Value = language.Id.ToString(),Text = language.Name
+                });
+            }
+
+            return languageModel;
         }
 
     }

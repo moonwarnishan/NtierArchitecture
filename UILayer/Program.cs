@@ -11,14 +11,21 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddLinqToDBContext<ApplicationDataConnection>((provider,options)=>
-   options.UseSqlServer(builder.Configuration.GetConnectionString("PersonInfo")));
+   options.UseSqlServer(builder.Configuration.GetConnectionString("PersonInfo") ?? string.Empty));
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<ILanguageServices, LanguageServices>();
 builder.Services.AddScoped<IPersonServices, PersonServices>();
 builder.Services.AddScoped<IPersonInfoIndifferentLanguagesServices,PersonInfoIndifferentLanguagesServices>();
 builder.Services.AddScoped<IPersonFactory, PersonFactory>();
+builder.Services.AddScoped<ILanguageFactory, LanguageFactory>();
+builder.Services.AddScoped<IPersonInDifferentLanguagesFactory, PersonInDifferentLanguagesFactory>();
 builder.Services.AddControllersWithViews();
+builder.Services.AddSession(options =>
+{
+    options.Cookie.Name = ".PersonInfo.Session";
+    options.Cookie.IsEssential = true;
+});
 
 
 var app = builder.Build();
@@ -37,7 +44,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
-
+app.UseSession();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

@@ -68,8 +68,12 @@ namespace UILayer.Controllers
             _personServices.Delete(_mapper.Map<Person>(personModel));
             return RedirectToAction("Index");
         }
-
-
+        [HttpGet]
+        public IActionResult Details(int id)
+        {
+            _personServices.GetById(id);
+            return View(_personFactory.PreparePersonModelForDetailsView(id));
+        }
 
     }
 }
