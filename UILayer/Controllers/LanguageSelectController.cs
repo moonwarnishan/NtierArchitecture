@@ -16,9 +16,9 @@ namespace UILayer.Controllers
             _personInDifferentLanguagesFactory=personInDifferentLanguagesFactory;
         }
         
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(_languageFactory.CreateLanguageModel());
+            return View(await _languageFactory.CreateLanguageModel());
         }
         [HttpPost]
         public IActionResult SelectConfirm(int id)

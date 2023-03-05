@@ -69,7 +69,6 @@ namespace UILayer.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-
         public IActionResult Delete(int id)
         {
             return DeleteConfirmed(id);

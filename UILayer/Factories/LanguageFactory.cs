@@ -15,7 +15,7 @@ namespace UILayer.Factories
             _mapper = mapper;
         }
 
-        public LanguageModel CreateLanguageModel()
+        public async Task<LanguageModel> CreateLanguageModel()
         {
             var languages = _languageServices.GetAll();
             var languageModel = new LanguageModel();

@@ -4,6 +4,6 @@ namespace UILayer.Factories
 {
     public interface ILanguageFactory
     {
-        LanguageModel CreateLanguageModel();
+        Task<LanguageModel> CreateLanguageModel();
     }
 }

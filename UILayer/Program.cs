@@ -47,6 +47,6 @@ app.UseAuthorization();
 app.UseSession();
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=LanguageSelect}/{action=Index}/{id?}");
 
 app.Run();
