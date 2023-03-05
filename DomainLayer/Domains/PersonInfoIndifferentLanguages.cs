@@ -12,6 +12,7 @@ namespace DomainLayer.Domains
     [Table("PersonsInfoInDifferentLanguages")]
     public class PersonInfosInDifferentLanguages : BaseEntity
     {
+        [Required, Column("Name")]
         public string Name { get; set; } 
         [Required, Column("DateOfBirth")]
         public DateTime DateOfBirth { get; set; }

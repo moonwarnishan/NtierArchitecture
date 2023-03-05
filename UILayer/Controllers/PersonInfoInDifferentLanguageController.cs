@@ -30,6 +30,10 @@ namespace UILayer.Controllers
 
         public IActionResult Index()
         {
+            if (HttpContext.Session.GetString("languageId") == null)
+            {
+                return View("~/Views/LanguageSelect/Index.cshtml");
+            }
             var persons = _personDifferentLanguagesFactory.GetPersonsOnSelectedLanguage(int.Parse(HttpContext.Session.GetString("languageId")));
             return View(persons);
         }
@@ -46,17 +50,10 @@ namespace UILayer.Controllers
             {
                 return View("~/Views/LanguageSelect/Index.cshtml");
             }
-            person.LanguageId = int.Parse(HttpContext.Session.GetString("languageId"));
-            person.Language = _languageServices.GetById(person.LanguageId);
-            person.Person = _personServices.GetById(person.PersonId);
-            if (ModelState.IsValid)
-            {
-                _personInfoIndifferentLanguagesServices.Insert(person);
-                return RedirectToAction(nameof(Index));
-            }
-            return View(personInfoInDifferentLanguagesModel);
+            person = PreparePerson(person);
+            _personInfoIndifferentLanguagesServices.Insert(person);
+            return RedirectToAction(nameof(Index));
         }
-        [HttpGet]
         public IActionResult Edit(int id)
         {
             return View(_personDifferentLanguagesFactory.PrepModelForPersonInDiffLangUpdate(id));
@@ -64,23 +61,23 @@ namespace UILayer.Controllers
         [HttpPost]
         public IActionResult Edit(PersonInfoInDifferentLanguagesModel personInfoInDifferentLanguagesModel)
         {
-            var person = _mapper.Map<PersonInfosInDifferentLanguages>(personInfoInDifferentLanguagesModel);
-            if (ModelState.IsValid)
-            {
-                _personInfoIndifferentLanguagesServices.Update(person);
-                return RedirectToAction(nameof(Index));
-            }
-            return View(personInfoInDifferentLanguagesModel);
+            var model = _personDifferentLanguagesFactory.PrepModelForPersonInDiffLangUpdate(Convert.ToInt32(personInfoInDifferentLanguagesModel.Id));
+            model.Name = personInfoInDifferentLanguagesModel.Name;
+            var personinfo = _mapper.Map<PersonInfosInDifferentLanguages>(model);
+            personinfo.Person = _personServices.GetById(personinfo.PersonId);
+            _personInfoIndifferentLanguagesServices.Update(personinfo);
+            return RedirectToAction(nameof(Index));
         }
-        [HttpGet]
+
+
         public IActionResult Delete(int id)
         {
-            return View(_personDifferentLanguagesFactory.PrepModelForPersonInDiffLangUpdate(id));
+            return DeleteConfirmed(id);
         }
         [HttpPost]
-        public IActionResult Delete(PersonInfoInDifferentLanguagesModel model)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var person = _mapper.Map<PersonInfosInDifferentLanguages>(model);
+            var person = _personInfoIndifferentLanguagesServices.GetById(id);
             _personInfoIndifferentLanguagesServices.Delete(person);
             return RedirectToAction(nameof(Index));
         }
@@ -88,8 +85,26 @@ namespace UILayer.Controllers
         public IActionResult Details(int id)
         {
             var personInfoModel = _personInfoIndifferentLanguagesServices.GetById(id);
+            personInfoModel.Person = _personServices.GetById(personInfoModel.PersonId);
+            personInfoModel.Language = _languageServices.GetById(personInfoModel.LanguageId);
             return View(_mapper.Map<PersonInfoInDifferentLanguagesModel>(personInfoModel));
         }
-        
+
+
+        private PersonInfosInDifferentLanguages PreparePerson(PersonInfosInDifferentLanguages model)
+        {
+            var person = new PersonInfosInDifferentLanguages();
+            person.LanguageId = int.Parse(HttpContext.Session.GetString("languageId"));
+            person.Language = _languageServices.GetById(person.LanguageId);
+            person.Person = _personServices.GetById(model.PersonId);
+            person.Name = model.Name;
+            person.DateOfBirth = person.Person.DateOfBirth;
+            person.Gender = person.Person.Gender;
+            person.MaritalStatus = person.Person.MaritalStatus;
+            person.PersonId = model.PersonId;
+            return person;
+        }
+
+
     }
 }

@@ -11,6 +11,8 @@ namespace UILayer.Models
         {
             AllPersons = new List<SelectListItem>();
             AllLanguages = new List<SelectListItem>();
+            AllGenders = new List<SelectListItem>();
+            AllMaterialStatus = new List<SelectListItem>();
         }
         public int? Id { get; set; }
         [DisplayName("Name")]
@@ -34,6 +36,8 @@ namespace UILayer.Models
         public List<SelectListItem>? AllPersons { get; set; }
         [DisplayName("All Languages")]
         public List<SelectListItem>? AllLanguages { get; set; }
+        public List<SelectListItem>? AllGenders { get; set; }
+        public List<SelectListItem>? AllMaterialStatus { get; set; }
 
     }
 }

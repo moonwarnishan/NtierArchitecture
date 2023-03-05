@@ -10,7 +10,7 @@ namespace DomainLayer.Domains
 {
     public class BaseEntity
     {
-        [PrimaryKey,Identity,]
+        [PrimaryKey,Identity]
         public int Id { get; set; }
     }
 }
