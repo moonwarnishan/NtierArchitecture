@@ -18,11 +18,23 @@ namespace UILayer.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var languages =_languageServices.GetAll();
-            var languageModels = _mapper.Map<List<LanguageModel>>(languages);
+            /*var languages =_languageServices.GetAll();
+            _mapper.Map<List<LanguageModel>>(languages);*/
+            var languageModels = new List<LanguageModel>();
+
             
             return View(languageModels);
         }
+
+        public JsonResult GetAll()
+        {
+            var languages = _languageServices.GetAll();
+            var languageModels = _mapper.Map<List<LanguageModel>>(languages);
+
+            return new JsonResult(languageModels);
+        }
+
+        
         public IActionResult Create()
         {
             return View();
