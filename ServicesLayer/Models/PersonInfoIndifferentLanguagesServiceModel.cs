@@ -1,29 +1,29 @@
-﻿using System;
+﻿using DomainLayer.Domains;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using LinqToDB.Mapping;
 
-namespace DomainLayer.Domains
+namespace ServicesLayer.Models
 {
-    [Table("PersonInfoInDifferentLanguages")]
-    public class PersonInfosInDifferentLanguages : BaseEntity
+    internal class PersonInfoIndifferentLanguagesServiceModel
     {
-        [Required, Column("Name")]
-        public string Name { get; set; } 
-        [Required, Column("DateOfBirth")]
+        public int Id { get; set; }
+        [Required]
+        public string Name { get; set; }
+        [Required]
         public DateTime DateOfBirth { get; set; }
-        [Required, Column("Gender")]
+        [Required]
         public int Gender { get; set; }
-        [Required, Column("MaritalStatus")]
+        [Required]
         public int MaritalStatus { get; set; }
-        [Column("PersonId")]
+        [Required]
         public int PersonId { get; set; }
+        [Required]
         public Person Person { get; set; }
-        [Column("LanguageId")]
+        [Required]
         public int LanguageId { get; set; }
         public Language Language { get; set; }
     }

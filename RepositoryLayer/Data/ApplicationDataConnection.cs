@@ -12,7 +12,7 @@ namespace RepositoryLayer.Data
         public ApplicationDataConnection(DataOptions<ApplicationDataConnection> options)
         : base(
               new DataOptions()
-            .UseSqlServer("Server=MOONWAR;Database=PersonInfoLayeredArchitecture;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True;")
+            .UseSqlServer("Server=.;Database=PersonInfoLayeredArchitecture;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True;")
             )
         {
 

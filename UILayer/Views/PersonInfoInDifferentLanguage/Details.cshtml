@@ -3,11 +3,12 @@
 @{
     ViewData["Title"] = "Details";
 }
-
-<h1>Details</h1>
+<div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+        <h1>Person Details</h1>
 
 <div>
-    <h4>PersonsInfoLanguages</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -52,3 +53,8 @@
     <a asp-controller="PersonInfoInDifferentLanguage" asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
     <a asp-controller="PersonInfoInDifferentLanguage" asp-action="Index">Back to List</a>
 </div>
+    </div>
+    <div class="col-3"></div>
+</div>
+
+

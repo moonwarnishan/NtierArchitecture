@@ -27,7 +27,7 @@ namespace UILayer.Models
         public string? MaritalStatusInfo { get; set; }
         [Required, DisplayName("Gender")]
         public string? GenderInfo { get; set; }
-
+        [DisplayName("Persons")]
         public int? PersonId { get; set; }
         public Person? Person { get; set; }
         public int? LanguageId { get; set; }

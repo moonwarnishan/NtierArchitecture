@@ -42,6 +42,7 @@ namespace UILayer.Controllers
         {
             return View(_personDifferentLanguagesFactory.PrepModelForPersonInDiffLangCreate());
         }
+
         [HttpPost]
         public IActionResult Create(PersonInfoInDifferentLanguagesModel personInfoInDifferentLanguagesModel)
         {
@@ -51,13 +52,19 @@ namespace UILayer.Controllers
                 return View("~/Views/LanguageSelect/Index.cshtml");
             }
             person = PreparePerson(person);
+            if (_personInfoIndifferentLanguagesServices.GetAll().Where(x => x.LanguageId == person.LanguageId && x.PersonId == person.PersonId).Count() > 0)
+            {
+                return View("~/Views/PersonInfoInDifferentLanguage/PersonAlreadyExist.cshtml");
+            }
             _personInfoIndifferentLanguagesServices.Insert(person);
             return RedirectToAction(nameof(Index));
         }
+
         public IActionResult Edit(int id)
         {
             return View(_personDifferentLanguagesFactory.PrepModelForPersonInDiffLangUpdate(id));
         }
+
         [HttpPost]
         public IActionResult Edit(PersonInfoInDifferentLanguagesModel personInfoInDifferentLanguagesModel)
         {
@@ -69,10 +76,12 @@ namespace UILayer.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+
         public IActionResult Delete(int id)
         {
             return DeleteConfirmed(id);
         }
+
         [HttpPost]
         public IActionResult DeleteConfirmed(int id)
         {
@@ -88,7 +97,6 @@ namespace UILayer.Controllers
             personInfoModel.Language = _languageServices.GetById(personInfoModel.LanguageId);
             return View(_mapper.Map<PersonInfoInDifferentLanguagesModel>(personInfoModel));
         }
-
 
         private PersonInfosInDifferentLanguages PreparePerson(PersonInfosInDifferentLanguages model)
         {

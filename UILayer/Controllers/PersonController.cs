@@ -46,6 +46,7 @@ namespace UILayer.Controllers
             var personModel = _personFactory.PreparePersonModelForEdit(id);
             return View(personModel);
         }
+
         [HttpPost]
         public IActionResult Edit(PersonModel personModel)
         {
@@ -68,6 +69,7 @@ namespace UILayer.Controllers
             _personServices.Delete(_mapper.Map<Person>(personModel));
             return RedirectToAction("Index");
         }
+
         [HttpGet]
         public IActionResult Details(int id)
         {
